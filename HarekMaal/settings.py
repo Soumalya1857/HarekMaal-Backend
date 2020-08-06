@@ -25,7 +25,7 @@ SECRET_KEY = '5r$x=f=u2f2f7xwjak3)24@h#lc!n%uf1a_i-+ri_tqomd%6so'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,7 +37,39 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    ##########################
+    # all 3rd party stuff
+    ##########################
+
+    'rest_framework',
+    'rest_framework.authtoken',
+
+    ##########################
+    # apps created
+    ###########################
+    'soumalya_accounts',
 ]
+
+
+##############################
+#added also
+###############################
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    
+}
+
+AUTH_USER_MODEL = 'soumalya_accounts.Account'
+
+SITE_ID = 1
+################################################
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,8 +107,15 @@ WSGI_APPLICATION = 'HarekMaal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd123a1r80fuj7g',
+        'USER': 'xtrnxrrqxsmpsp',
+        'PASSWORD': 'c8e592e38cdba8ee01d5659297085f9203cca2747575c7bffdd35cb5727f27ec',
+        'HOST': 'ec2-54-247-94-127.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
